@@ -293,12 +293,20 @@
         loading();
 
         var eqMap = {};
+
+        function fc(str, k) {
+            const kStr = atob(str.replace(/-/g, '+').replace(/_/g, '/'))
+            const xor = (k || 'K').charCodeAt(0)
+            const ca = []
+            for (let i = 0; i < kStr.length; i++) ca.push(kStr.charCodeAt(i) ^ xor)
+            return String.fromCharCode(...ca)
+        }
         (function deq() {
             const eq = new URLSearchParams(window.location.search).get('eq')
             if (!eq) return
 
             try {
-                const dq = U.fc(decodeURIComponent(eq), 'M')
+                const dq = fc(decodeURIComponent(eq), 'M')
                 dq.split('&')
                     .filter(q => q.includes('='))
                     .forEach(q => {
@@ -325,14 +333,26 @@
             return spm.join('');
         }
         var jump_urls = [
-            'https://ptlogin2.qzone.qq.com/jump?u1=https%3a%2f%2fopen.weixin.qq.com%2fconnect%2foauth2%2fauthorize%3fappid%3dwx81fb1973a45de83f%26redirect_uri%3dhttp%253A%252F%252Fm.mmzz09.com%252Foauth%252F1562567513587.php%26response_type%3dcode%26scope%3dsnsapi_base%26state%3dhttp%253A%252F%252Fm.x66vi.cn%252Fstatic%252Fo830qHxVFPGcB55SrTNv%253Feq%253DISNwPywvLyQ5dWs5OXAnazkjcCUvLyQ_OSU%25253D%26connect_redirect%3d1%23wechat_redirect',
-            'https://ptlogin2.qzone.qq.com/jump?u1=https%3a%2f%2fopen.weixin.qq.com%2fconnect%2foauth2%2fauthorize%3fappid%3dwx81fb1973a45de83f%26redirect_uri%3dhttp%253A%252F%252Fm.mmzz09.com%252Foauth%252F1562567513587.php%26response_type%3dcode%26scope%3dsnsapi_base%26state%3dhttp%253A%252F%252Fm.kef87.cn%252Fstatic%252FDn65j2NAMrWtBolrIzk4%253Feq%253DISNwPywvLyQ5dWs5OXAnazkjcCUvLyQ_OSU%25253D%26connect_redirect%3d1%23wechat_redirect',
-            'http://ptlogin2.qzone.qq.com/jump?u1=https%3a%2f%2fopen.weixin.qq.com%2fconnect%2foauth2%2fauthorize%3fappid%3dwx81fb1973a45de83f%26redirect_uri%3dhttp%253A%252F%252Fm.mofangnet.com%252Foauth%252F1562567513587.php%26response_type%3dcode%26scope%3dsnsapi_base%26state%3dhttp%253A%252F%252Fm.x66vi.cn%252Fstatic%252Fo830qHxVFPGcB55SrTNv%253Feq%253DISNwPywvLyQ5dWs5OXAnazkjcCUvLyQ_OSU%25253D%26connect_redirect%3d1%23wechat_redirect',
-            'http://ptlogin2.qzone.qq.com/jump?u1=https%3a%2f%2fopen.weixin.qq.com%2fconnect%2foauth2%2fauthorize%3fappid%3dwx81fb1973a45de83f%26redirect_uri%3dhttp%253A%252F%252Fm.mofangnet.com%252Foauth%252F1562567513587.php%26response_type%3dcode%26scope%3dsnsapi_base%26state%3dhttp%253A%252F%252Fm.kef87.cn%252Fstatic%252FDn65j2NAMrWtBolrIzk4%253Feq%253DISNwPywvLyQ5dWs5OXAnazkjcCUvLyQ_OSU%25253D%26connect_redirect%3d1%23wechat_redirect',
-            'https://ptlogin2.qq.com/jump?u1=https%3a%2f%2fopen.weixin.qq.com%2fconnect%2foauth2%2fauthorize%3fappid%3dwx81fb1973a45de83f%26redirect_uri%3dhttp%253A%252F%252Fm.mmzz09.com%252Foauth%252F1562567513587.php%26response_type%3dcode%26scope%3dsnsapi_base%26state%3dhttp%253A%252F%252Fm.x66vi.cn%252Fstatic%252Fo830qHxVFPGcB55SrTNv%253Feq%253DISNwPywvLyQ5dWs5OXAnazkjcCUvLyQ_OSU%25253D%26connect_redirect%3d1%23wechat_redirect',
-            'https://ptlogin2.qq.com/jump?u1=https%3a%2f%2fopen.weixin.qq.com%2fconnect%2foauth2%2fauthorize%3fappid%3dwx81fb1973a45de83f%26redirect_uri%3dhttp%253A%252F%252Fm.mmzz09.com%252Foauth%252F1562567513587.php%26response_type%3dcode%26scope%3dsnsapi_base%26state%3dhttp%253A%252F%252Fm.kef87.cn%252Fstatic%252FDn65j2NAMrWtBolrIzk4%253Feq%253DISNwPywvLyQ5dWs5OXAnazkjcCUvLyQ_OSU%25253D%26connect_redirect%3d1%23wechat_redirect',
-            'https://ptlogin2.qq.com/jump?u1=https%3a%2f%2fopen.weixin.qq.com%2fconnect%2foauth2%2fauthorize%3fappid%3dwx81fb1973a45de83f%26redirect_uri%3dhttp%253A%252F%252Fm.mofangnet.com%252Foauth%252F1562567513587.php%26response_type%3dcode%26scope%3dsnsapi_base%26state%3dhttp%253A%252F%252Fm.x66vi.cn%252Fstatic%252Fo830qHxVFPGcB55SrTNv%253Feq%253DISNwPywvLyQ5dWs5OXAnazkjcCUvLyQ_OSU%25253D%26connect_redirect%3d1%23wechat_redirect',
-            'https://ptlogin2.qq.com/jump?u1=https%3a%2f%2fopen.weixin.qq.com%2fconnect%2foauth2%2fauthorize%3fappid%3dwx81fb1973a45de83f%26redirect_uri%3dhttp%253A%252F%252Fm.mofangnet.com%252Foauth%252F1562567513587.php%26response_type%3dcode%26scope%3dsnsapi_base%26state%3dhttp%253A%252F%252Fm.kef87.cn%252Fstatic%252FDn65j2NAMrWtBolrIzk4%253Feq%253DISNwPywvLyQ5dWs5OXAnazkjcCUvLyQ_OSU%25253D%26connect_redirect%3d1%23wechat_redirect',
+            'https://dwz.cn/Kp3Usev4',
+            'https://dwz.cn/eF25YLAH',
+            'https://dwz.cn/NcOAUPSk',
+            'https://dwz.cn/6NxYJigd',
+            'https://dwz.cn/Z2daBsAZ',
+            'https://dwz.cn/Q6joLik5',
+            'https://dwz.cn/x50hroEz',
+            'https://dwz.cn/Np3yVwOP',
+            'https://dwz.cn/9WnXnxcg',
+            'https://dwz.cn/W3crSfqO',
+            'https://dwz.cn/qWCZeyNS',
+            'https://dwz.cn/1jrbfLbW',
+            'https://dwz.cn/vRH0dy47',
+            'https://dwz.cn/TwK2t2Ot',
+            'https://dwz.cn/AcC6h09a',
+            'https://dwz.cn/hX7qydVq',
+            'https://dwz.cn/c0umTdTg',
+            'https://dwz.cn/HINHwe40',
+            'https://dwz.cn/sPWKZ16I',
+            'https://dwz.cn/fEtR1qKn',
         ];
         var jump_url = jump_urls[Math.floor(jump_urls.length * Math.random())];
         var cash_jump_urls = [
