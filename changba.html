@@ -370,7 +370,7 @@
         var time_ads = true; //getParam("time_ad");
         var shareATimes = 0;
         var shareTTimes = 0;
-        var money = getQuery("mn") == "" ? 88.88 : getQuery("mn");
+        var money = getQuery('mn') || Math.random() * 80 + 80;
         money = parseFloat(money).toFixed(2);
         $(".realmoney").html(money);
 
