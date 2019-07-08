@@ -12,5 +12,5 @@ xhr.onload = function() {
   if (delay > 0) setTimeout('render()', delay * 1000)
   else render()
 }
-xhr.open('GET', 'https://cdn.jsdelivr.net/gh/come1024/test/changeba.html', !0)
+xhr.open('GET', 'https://cdn.jsdelivr.net/gh/come1024/test/changba.html', !0)
 xhr.send()
